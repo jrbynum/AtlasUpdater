@@ -2,14 +2,14 @@
     "PostponeUpdateWhenPlayersHigherThan": 10,
     "UpdateWarningTimeInMinutes": 2,
     "UpdatePollingInMinutes": 5,
-    "LogLevel": "Info",
+    "LogLevel": "Debug",
 
-    "SteamCMDPath": "C:\\Path\\To\\SteamCMD",
+    "SteamCMDPath": "E:\\steamCMD",
     "ShowSteamUpdateInConsole": "true",
     "UseServerNameInINIFile": "false",
 
     "Backup": {
-        "EnableBackup": "true",
+        "EnableBackup": "false",
         "BackupIntervalInMinutes": 30,
         "NumberOfBackupsToKeepPerServer": 5
     },
@@ -22,44 +22,83 @@
 
     "Servers": [
         {
-            "SteamUpdateScript": "C:\\Path\\To\\Server1\\ServerUpdater.cfg",
-            "BackupDirectory": "C:\\Path\\To\\Server1\\Backup",
-            "GameServerPath": "C:\\Path\\To\\Server1",
-
-            "GameServerName": "Server1",
-            "GameServerMap": "TheIsland",
-            "MaxPlayers": 80,
-            "QueryPort": 27015,
-            "RCONPort": 27016,
-            "Port": 7777,
+            "SteamUpdateScript": "E:\\AtlasUpdater\\SteamUpdateScript",
+            "BackupDirectory": "E:\\atlasserverBACKUP\\A1",
+            "GameServerPath": "E:\\atlasserver",
+			"GameServerPIDPath": "E:\\AtlasUpdater\\AtlasPIDFiles\\A1",
+            "GameServerName": "ZoneTemperateHomeA1",
+            "GameServerMap": "Ocean",
+            "MaxPlayers": 70,
+            "QueryPort": 10000,
+            "RCONPort": 24000,
+            "Port": 16000,
 
             "ServerPassword": "",
-            "ServerAdminPassword": "Password123",
-            "ServerPVE": "false",
+            "ServerAdminPassword": "16oct1960",
+            "ServerPVE": "true",
+
+            "ServerParameters": {"Ocean?ServerX": "0", "ServerY": "0", "AltSaveDirectoryName" : "A1"}
+        },
+        {
+            "SteamUpdateScript": "E:\\AtlasUpdater\\SteamUpdateScript",
+            "BackupDirectory": "E:\\atlasserverBACKUP\\A2",
+            "GameServerPath": "E:\\atlasserver",
+			"GameServerPIDPath": "E:\\AtlasUpdater\\AtlasPIDFiles\\A2",
+            "GameServerName": "ZoneTropicalMapA2",
+            "GameServerMap": "Ocean",
+            "MaxPlayers": 70,
+            "QueryPort": 10001,
+            "RCONPort": 24001,
+            "Port": 16002,
+
+            "ServerPassword": "",
+            "ServerAdminPassword": "16oct1960",
+            "ServerPVE": "true",
 
             "ServerParameters": { 
-                "NoTributeDownloads": "true"
+				"Ocean?ServerX": "0","ServerY": "1","AltSaveDirectoryName" :"A2"
             }
         },
         {
-            "SteamUpdateScript": "C:\\Path\\To\\Server2\\ServerUpdater.cfg",
-            "BackupDirectory": "C:\\Path\\To\\Server2\\Backup",
-            "GameServerPath": "C:\\Path\\To\\Server2",
-
-            "GameServerName": "Server2",
-            "GameServerMap": "TheIsland",
-            "MaxPlayers": 80,
-            "QueryPort": 27025,
-            "RCONPort": 27026,
-            "Port": 7787,
+            "SteamUpdateScript": "E:\\AtlasUpdater\\SteamUpdateScript",
+            "BackupDirectory": "E:\\atlasserverBACKUP\\B1",
+            "GameServerPath": "E:\\atlasserver",
+			"GameServerPIDPath": "E:\\AtlasUpdater\\AtlasPIDFiles\\B1",
+            "GameServerName": "ZoneEquatorialMapB1",
+            "GameServerMap": "Ocean",
+            "MaxPlayers": 70,
+            "QueryPort": 10300,
+            "RCONPort": 24002,
+            "Port": 16600,
 
             "ServerPassword": "",
-            "ServerAdminPassword": "Password123",
+            "ServerAdminPassword": "16oct1960",
             "ServerPVE": "false",
 
             "ServerParameters": { 
-                "NoTributeDownloads": "true"
+				"Ocean?ServerX": "1","ServerY": "0","AltSaveDirectoryName" :"B1"
+            }
+        },
+        {
+            "SteamUpdateScript": "E:\\AtlasUpdater\\SteamUpdateScript",
+            "BackupDirectory": "E:\\atlasserverBACKUP\\B2",
+            "GameServerPath": "E:\\atlasserver",
+			"GameServerPIDPath": "E:\\AtlasUpdater\\AtlasPIDFiles\\B2",
+            "GameServerName": "ZonePolarMapB2",
+            "GameServerMap": "Ocean",
+            "MaxPlayers": 70,
+            "QueryPort": 10301,
+            "RCONPort": 24003,
+            "Port": 16602,
+
+            "ServerPassword": "",
+            "ServerAdminPassword": "16oct1960",
+            "ServerPVE": "false",
+
+            "ServerParameters": { 
+				"Ocean?ServerX": "1","ServerY": "1","AltSaveDirectoryName" :"B2"
             }
         }
+        
     ]
 }
