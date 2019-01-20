@@ -90,7 +90,8 @@ namespace AtlasUpdater.Classes
 			public string SteamUpdateScript { get; set; }
 			public string BackupDirectory { get; set; }
 			public string GameServerPath { get; set; }
-			public string GameServerName { get; set; }
+            public string GameServerPIDPath { get; set; }
+            public string GameServerName { get; set; }
 			public string ServerPassword { get; set; }
 			public string GameServerMap { get; set; }
 

@@ -57,7 +57,7 @@ namespace AtlasUpdater.Interfaces
 				ResetEvent.Set();
 			});
 
-			File.Delete(string.Format("{0}\\server.pid", ServerData.GameServerPath));
+			File.Delete(string.Format("{0}\\server.pid", ServerData.GameServerPIDPath));
 			thisProcess.CloseMainWindow();
 			return true;
 		}
@@ -65,7 +65,7 @@ namespace AtlasUpdater.Interfaces
 		public override int StartServer(SettingsLoader.ServerChild ServerData)
 		{
 			// Check for existing process
-			var ProcessID = _ReadProcessFile(ServerData.GameServerPath);
+			var ProcessID = _ReadProcessFile(ServerData.GameServerPIDPath);
 			if( ProcessID != -1 )
 			{
 				try
@@ -120,7 +120,7 @@ namespace AtlasUpdater.Interfaces
 			{
 				// Write process to pid file
 				var Proc = Process.Start(ProcessData);
-				_WriteProcessFile(ServerData.GameServerPath, Proc.Id);
+				_WriteProcessFile(ServerData.GameServerPIDPath, Proc.Id);
 
 				// Listener for Exit Event
 				_ProcessDict.Add(Proc, ServerData);
@@ -144,7 +144,7 @@ namespace AtlasUpdater.Interfaces
 
 		public override bool ServerRunning(SettingsLoader.ServerChild ServerData)
 		{
-			var ProcessID = _ReadProcessFile(ServerData.GameServerPath);
+			var ProcessID = _ReadProcessFile(ServerData.GameServerPIDPath);
 			if( ProcessID != -1 )
 			{
 				try
