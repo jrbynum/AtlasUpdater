@@ -21,9 +21,9 @@ To setup your servers to work with AtlasUpdater, perform the following.
 
 2) Compile/Use a precompiled build of AtlasUpdater, and extract to a folder with write permissions.
 
-3) Rename settings-template.json to settings.json and add your servers to the configuration (see section below).
+3) Modify the settings.json file to your system ... add your servers and path information to the configuration (see section below).
 
-4) Start ARKUpdater and allow it to launch your servers for you
+4) Start AtlasUpdater and allow it to launch your servers for you
 
 5) Revel in the glory of your auto updating servers. You are such a good server admin!
 
@@ -107,6 +107,11 @@ AtlasUpdater will respawn any servers that close while it is running if it does 
 - GameServerPath
 
 	The path to the root of the gameserver. Should contain the 'Engine' and 'ShooterGame' folders.
+	
+- GameServerPIDPath
+
+	A Path to a directory that holds a pid file for each server grod that you start. I.E. - for a 2x2 Grid you will have 4 servers  	running so you will need 4 directories.	"E:\\AtlasUpdater\\AtlasPIDFiles\\A1" ,  "E:\\AtlasUpdater\\AtlasPIDFiles\\A2", 
+	"E:\\AtlasUpdater\\AtlasPIDFiles\\B1", "E:\\AtlasUpdater\\AtlasPIDFiles\\B2" 
 
 - GameServerName
 
@@ -115,7 +120,7 @@ AtlasUpdater will respawn any servers that close while it is running if it does 
 
 - GameServerMap
 
-	The map for this server to run. Usually 'TheIsland'.
+	The map for this server to run. Always 'Ocean'.
 
 - MaxPlayers
 
@@ -164,7 +169,7 @@ If leaving a field blank, place empty speech marks, for example: "ServerPassword
 ## Work In Progress
 
 - Better validation for settings.json.
-- Linux Support (Priority!)
+ - Cleanup some not needed setup flags and settings in the .jason file
 
 ## Mentions
 
@@ -179,7 +184,6 @@ https://github.com/SteamRE/SteamKit
 
 SevenZipSharp - C# Wrapper for 7z
 https://sevenzipsharp.codeplex.com/
-
 
 
 This application contains code from part of the 7-zip project. Licensed under the GNU LGPL License.
