@@ -1,25 +1,25 @@
-**ARKUpdater**
+**AtlasUpdater**
 
-ARKUpdater is a Console Application (in c#) written for the purpose of performing updates and backups for ARK: Survival Evolved Servers.
+This is a modification and re-write from Bottswana's Ark Updater located at: https://github.com/Bottswana/ARKUpdater in order to work with the Atlas dedicated server.
+
+AtlasUpdater is a Console Application (in c#) written for the purpose of performing updates and backups for Atlas Dedicated Servers.
 It is intended for Server Admins who wish to automate their backup and updating processes, without using Server Manager GUIs.
-
-ARKUpdater is released publically under the MIT License, and is free to use. For more information on the MIT License, see [LICENSE].
+AtlasUpdater is released publically under the MIT License, and is free to use. For more information on the MIT License, see [LICENSE].
 
 ## Features
-- Linux Support (Very soon!)
-- Console only (No GUI)
-- Auto restart of crashed servers
-- Auto update of servers
-- Auto backup of servers using compression
+-- Console only (No GUI)
+- Auto restart of crashed Grid servers
+- Auto update of server
+- Auto backup of Grid servers using compression
 - RCON messaging for warning users of restart/update.
 - Only update when player count is less than a value (optional)
 
 ## Setup
-To setup your servers to work with ARKUpdater, perform the following.
+To setup your servers to work with AtlasUpdater, perform the following.
 
 1) Shutdown your servers
 
-2) Compile/Use a precompiled build of ARKUpdater, and extract to a folder with write permissions.
+2) Compile/Use a precompiled build of AtlasUpdater, and extract to a folder with write permissions.
 
 3) Rename settings-template.json to settings.json and add your servers to the configuration (see section below).
 
@@ -29,12 +29,12 @@ To setup your servers to work with ARKUpdater, perform the following.
 
 
 ## Important Considerations
-On first launch of ARKUpdater, your servers should not be running (Or ARKUpdater will launch them again for you!)
+On first launch of AtlasUpdater, your servers should not be running (Or AtlasUpdater will launch them again for you!)
 ARKUpdater writes a PID file to the server directory for each server it is administering when it launches a server, so you can restart ARKUpdater without needing to restart your servers.
 
-This means that ARKUpdater needs to launch your servers to work. You can also edit this PID file with the ID of the process before launching as a fallback.
+This means that AtlasUpdater needs to launch your servers to work. You can also edit this PID file with the ID of the process before launching as a fallback.
 
-ARKUpdater will respawn any servers that close while it is running if it does not expect them to close. This means if you need to shut down a server, you need to stop ARKUpdater or it will relaunch the server for you.
+AtlasUpdater will respawn any servers that close while it is running if it does not expect them to close. This means if you need to shut down a server, you need to stop ARKUpdater or it will relaunch the server for you.
 
 ## Configuration Options
 
@@ -53,7 +53,7 @@ ARKUpdater will respawn any servers that close while it is running if it does no
 
 - UpdatePollingInMinutes
 
-	How often to poll the steam network for a ARK update. It is not recommended to set this too frequently, as this may cause unintended side effects.
+	How often to poll the steam network for a Atlas update. It is not recommended to set this too frequently, as this may cause unintended side effects.
 
 - LogLevel
 
@@ -68,7 +68,7 @@ ARKUpdater will respawn any servers that close while it is running if it does no
 
 - ShowSteamUpdateInConsole
 
-	If true, output from SteamCMD will be shown in the ARKUpdater console. If false, output will be supressed.
+	If true, output from SteamCMD will be shown in the AtlasUpdater console. If false, output will be supressed.
 	Default is true.
 
 - UseServerNameInINIFile
@@ -98,7 +98,7 @@ ARKUpdater will respawn any servers that close while it is running if it does no
 - SteamUpdateScript
 
 	Path to the SteamCMD update script for this server. If you are not currently using an update script, an example can be found in the resources folder.
-	Note: This script must end with the quit command, or ARKUpdater will hang waiting for SteamCMD to exit. Check the example script for a list of suggested commands.
+	Note: This script must end with the quit command, or AtlasUpdater will hang waiting for SteamCMD to exit. Check the example script for a list of suggested commands.
 
 - BackupDirectory
 
@@ -127,11 +127,11 @@ ARKUpdater will respawn any servers that close while it is running if it does no
 
 - RCONPort
 
-	The port for RCON. RCON must be enabled for ARKUpdater to work, but you can block/not allow this port through your firewall if you do not want RCON, as it is used over localhost by ARKUpdater.
+	The port for RCON. RCON must be enabled for AtlasUpdater to work, but you can block/not allow this port through your firewall if you do not want RCON, as it is used over localhost by AtlasUpdater.
 
 - Port
 
-	The gameserver port. Usually 7777.
+	The gameserver port. There will be one for each Grid Server
 
 - ServerPassword
 
