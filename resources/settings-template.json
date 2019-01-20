@@ -1,0 +1,65 @@
+{
+    "PostponeUpdateWhenPlayersHigherThan": 10,
+    "UpdateWarningTimeInMinutes": 2,
+    "UpdatePollingInMinutes": 5,
+    "LogLevel": "Info",
+
+    "SteamCMDPath": "C:\\Path\\To\\SteamCMD",
+    "ShowSteamUpdateInConsole": "true",
+    "UseServerNameInINIFile": "false",
+
+    "Backup": {
+        "EnableBackup": "true",
+        "BackupIntervalInMinutes": 30,
+        "NumberOfBackupsToKeepPerServer": 5
+    },
+
+    "Messages": {
+        "ServerUpdateBroadcast": "This server will shut down in {0} minute(s) for an update",
+        "ServerBackupBroadcast": "This server is performing a backup, this may take a few minutes",
+        "ServerShutdownBroadcast": "This server will now shut down for an update"
+    },
+
+    "Servers": [
+        {
+            "SteamUpdateScript": "C:\\Path\\To\\Server1\\ServerUpdater.cfg",
+            "BackupDirectory": "C:\\Path\\To\\Server1\\Backup",
+            "GameServerPath": "C:\\Path\\To\\Server1",
+
+            "GameServerName": "Server1",
+            "GameServerMap": "TheIsland",
+            "MaxPlayers": 80,
+            "QueryPort": 27015,
+            "RCONPort": 27016,
+            "Port": 7777,
+
+            "ServerPassword": "",
+            "ServerAdminPassword": "Password123",
+            "ServerPVE": "false",
+
+            "ServerParameters": { 
+                "NoTributeDownloads": "true"
+            }
+        },
+        {
+            "SteamUpdateScript": "C:\\Path\\To\\Server2\\ServerUpdater.cfg",
+            "BackupDirectory": "C:\\Path\\To\\Server2\\Backup",
+            "GameServerPath": "C:\\Path\\To\\Server2",
+
+            "GameServerName": "Server2",
+            "GameServerMap": "TheIsland",
+            "MaxPlayers": 80,
+            "QueryPort": 27025,
+            "RCONPort": 27026,
+            "Port": 7787,
+
+            "ServerPassword": "",
+            "ServerAdminPassword": "Password123",
+            "ServerPVE": "false",
+
+            "ServerParameters": { 
+                "NoTributeDownloads": "true"
+            }
+        }
+    ]
+}

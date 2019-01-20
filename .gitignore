@@ -1,0 +1,10 @@
+[Oo]bj
+[Rr]elease
+[Dd]ebug
+packages
+*.suo
+*.user
+*.dll
+*.exe
+*.log
+/.vs/AtlasUpdater/v15/Server/sqlite3
