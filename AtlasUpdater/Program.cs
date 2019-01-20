@@ -263,7 +263,32 @@ namespace AtlasUpdater
 						LastUpdatePollTime = Helpers.CurrentUnixStamp;
 						if( ( BuildNumber > PreviousBuild ) && ( PreviousBuild != -1 ) ) Log.ConsolePrint(LogLevel.Info, "A new build of Atlas is available. Build number: {0}", BuildNumber);
 					}
-				}
+
+                    //add surver query to get # of players
+
+                    // Check for Player Requirement
+                    //if (ATLASConfiguration.PostponeUpdateWhenPlayersHigherThan > 0)
+                    //{
+                    foreach (var Server in Servers)
+                    {
+
+                        using (var Query = new SrcQuery("127.0.0.1", Server.ServerData.QueryPort))
+                        {
+                            try
+                            {
+                                var QueryData = Query.QueryServer();
+//                                if (Convert.ToInt32(QueryData["CurrentPlayers"]) > ATLASConfiguration.PostponeUpdateWhenPlayersHigherThan)
+//                                {
+                                    Log.ConsolePrint(LogLevel.Info, "Server '{0}' has {1} Players online", Server.ServerData.GameServerName, QueryData["CurrentPlayers"]);
+                                    continue;
+//                                }
+                            }
+                            catch (QueryException) { }
+                        }
+                    }
+                    //}
+
+                }
 
 				bool MinutePassed = ( LastMinutePollTime + 60 <= Helpers.CurrentUnixStamp ) ? true : false;
 				//foreach( var Server in Servers )

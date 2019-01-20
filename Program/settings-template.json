@@ -1,0 +1,104 @@
+{
+    "PostponeUpdateWhenPlayersHigherThan": 10,
+    "UpdateWarningTimeInMinutes": 2,
+    "UpdatePollingInMinutes": 5,
+    "LogLevel": "Debug",
+
+    "SteamCMDPath": "E:\\steamCMD",
+    "ShowSteamUpdateInConsole": "true",
+    "UseServerNameInINIFile": "false",
+
+    "Backup": {
+        "EnableBackup": "false",
+        "BackupIntervalInMinutes": 30,
+        "NumberOfBackupsToKeepPerServer": 5
+    },
+
+    "Messages": {
+        "ServerUpdateBroadcast": "This server will shut down in {0} minute(s) for an update",
+        "ServerBackupBroadcast": "This server is performing a backup, this may take a few minutes",
+        "ServerShutdownBroadcast": "This server will now shut down for an update"
+    },
+
+    "Servers": [
+        {
+            "SteamUpdateScript": "E:\\AtlasUpdater\\SteamUpdateScript",
+            "BackupDirectory": "E:\\atlasserverBACKUP\\A1",
+            "GameServerPath": "E:\\atlasserver",
+			"GameServerPIDPath": "E:\\AtlasUpdater\\AtlasPIDFiles\\A1",
+            "GameServerName": "ZoneTemperateHomeA1",
+            "GameServerMap": "Ocean",
+            "MaxPlayers": 70,
+            "QueryPort": 10000,
+            "RCONPort": 24000,
+            "Port": 16000,
+
+            "ServerPassword": "",
+            "ServerAdminPassword": "16oct1960",
+            "ServerPVE": "true",
+
+            "ServerParameters": {"Ocean?ServerX": "0", "ServerY": "0", "AltSaveDirectoryName" : "A1"}
+        },
+        {
+            "SteamUpdateScript": "E:\\AtlasUpdater\\SteamUpdateScript",
+            "BackupDirectory": "E:\\atlasserverBACKUP\\A2",
+            "GameServerPath": "E:\\atlasserver",
+			"GameServerPIDPath": "E:\\AtlasUpdater\\AtlasPIDFiles\\A2",
+            "GameServerName": "ZoneTropicalMapA2",
+            "GameServerMap": "Ocean",
+            "MaxPlayers": 70,
+            "QueryPort": 10001,
+            "RCONPort": 24001,
+            "Port": 16002,
+
+            "ServerPassword": "",
+            "ServerAdminPassword": "16oct1960",
+            "ServerPVE": "true",
+
+            "ServerParameters": { 
+				"Ocean?ServerX": "0","ServerY": "1","AltSaveDirectoryName" :"A2"
+            }
+        },
+        {
+            "SteamUpdateScript": "E:\\AtlasUpdater\\SteamUpdateScript",
+            "BackupDirectory": "E:\\atlasserverBACKUP\\B1",
+            "GameServerPath": "E:\\atlasserver",
+			"GameServerPIDPath": "E:\\AtlasUpdater\\AtlasPIDFiles\\B1",
+            "GameServerName": "ZoneEquatorialMapB1",
+            "GameServerMap": "Ocean",
+            "MaxPlayers": 70,
+            "QueryPort": 10300,
+            "RCONPort": 24002,
+            "Port": 16600,
+
+            "ServerPassword": "",
+            "ServerAdminPassword": "16oct1960",
+            "ServerPVE": "false",
+
+            "ServerParameters": { 
+				"Ocean?ServerX": "1","ServerY": "0","AltSaveDirectoryName" :"B1"
+            }
+        },
+        {
+            "SteamUpdateScript": "E:\\AtlasUpdater\\SteamUpdateScript",
+            "BackupDirectory": "E:\\atlasserverBACKUP\\B2",
+            "GameServerPath": "E:\\atlasserver",
+			"GameServerPIDPath": "E:\\AtlasUpdater\\AtlasPIDFiles\\B2",
+            "GameServerName": "ZonePolarMapB2",
+            "GameServerMap": "Ocean",
+            "MaxPlayers": 70,
+            "QueryPort": 10301,
+            "RCONPort": 24003,
+            "Port": 16602,
+
+            "ServerPassword": "",
+            "ServerAdminPassword": "16oct1960",
+            "ServerPVE": "false",
+
+            "ServerParameters": { 
+				"Ocean?ServerX": "1","ServerY": "1","AltSaveDirectoryName" :"B2"
+            }
+        }
+        
+    ]
+}
