@@ -17,7 +17,7 @@ namespace AtlasUpdater
 			try { Console.WindowWidth = 140; } catch ( NotSupportedException ) {}
 
 			// Because a little fun is compulsory
-			string[] ConsoleTitles = {"Queen of Dragons. Oh, wait. Pirates", "Jack of all servers, Master of none.", "Server Happiness Assurance."};
+			string[] ConsoleTitles = {"King of the Seas!... I mean Servers", "Your wish is my command... Master", "I never sleep... I'm always Watching..."};
 			Console.Title = string.Format("AtlasUpdater: {0}", ConsoleTitles[ (new Random()).Next(0, ConsoleTitles.Length) ]);
 
 			Console.CancelKeyPress += delegate(object sender, ConsoleCancelEventArgs e) {
