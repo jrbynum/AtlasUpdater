@@ -169,7 +169,8 @@ If leaving a field blank, place empty speech marks, for example: "ServerPassword
 ## Work In Progress
 
 - Better validation for settings.json.
- - Cleanup some not needed setup flags and settings in the .jason file
+- Cleanup some not needed setup flags and settings in the .jason file
+- Add a RCON messesage handler that list #of players on each server will update at the polling rate for checking for updates
 
 ## Mentions
 
