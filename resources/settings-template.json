@@ -22,7 +22,7 @@
 
     "Servers": [
         {
-            "SteamUpdateScript": "E:\\AtlasUpdater\\SteamUpdateScript",
+            "SteamUpdateScript": "E:\\AtlasUpdater\\SteamUpdateScript\\updatescript.cfg",
             "BackupDirectory": "E:\\atlasserverBACKUP\\A1",
             "GameServerPath": "E:\\atlasserver",
 			"GameServerPIDPath": "E:\\AtlasUpdater\\AtlasPIDFiles\\A1",
