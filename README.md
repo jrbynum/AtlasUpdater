@@ -17,6 +17,8 @@ AtlasUpdater is released publically under the MIT License, and is free to use. F
 ## Setup
 To setup your servers to work with AtlasUpdater, perform the following.
 
+YOU MUST HAVE .net FRAMEWORK 4.6.1 Installed!
+
 1) Shutdown your servers
 
 2) Compile/Use a precompiled build of AtlasUpdater, and extract to a folder with write permissions.
