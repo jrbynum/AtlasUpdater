@@ -38,7 +38,7 @@ This means that AtlasUpdater needs to launch your servers to work. You can also 
 
 AtlasUpdater will respawn any servers that close while it is running if it does not expect them to close. This means if you need to shut down a server, you need to stop ARKUpdater or it will relaunch the server for you.
 
-## Configuration Options
+## Configuration Options - in the setup.json file
 
 **Global Configuration Options:**
 
@@ -95,7 +95,7 @@ AtlasUpdater will respawn any servers that close while it is running if it does 
 	In UpdateBroadcast, {0} will be replaced with a minute count, and is mandatory.
 
 
-**Server Configuration Options:**
+**Server Configuration Options: - one entry for each grid server**  
 
 - SteamUpdateScript
 
@@ -172,7 +172,7 @@ If leaving a field blank, place empty speech marks, for example: "ServerPassword
 
 - Better validation for settings.json.
 - Cleanup some not needed setup flags and settings in the .jason file
-- Add a RCON messesage handler that list #of players on each server will update at the polling rate for checking for updates
+- Port everything over to a proper windows GUI
 
 ## Mentions
 
