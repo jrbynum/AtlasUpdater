@@ -7,6 +7,8 @@ using System.Reflection;
 using AtlasUpdater.Classes;
 using System.Diagnostics;
 using System.Collections.Generic;
+using System.IO.Compression;
+//using System.IO.Compression.FileSystem;
 
 namespace AtlasUpdater.Interfaces
 {
@@ -54,16 +56,20 @@ namespace AtlasUpdater.Interfaces
 			}
 
 			// Use 7zipSharp to compress the backup directory
-			SevenZipCompressor.SetLibraryPath("7za.dll");
-			var Compressor = new SevenZipCompressor()
-			{
-				CompressionLevel = CompressionLevel.Normal,
-				ArchiveFormat = OutArchiveFormat.SevenZip,
-				IncludeEmptyDirectories = true,
-			};
+			//SevenZipCompressor.SetLibraryPath("7za.dll");
+			//var Compressor = new SevenZipCompressor()
+			//{
+			//	CompressionLevel = CompressionLevel.Normal,
+			//	ArchiveFormat = OutArchiveFormat.SevenZip,
+			//	IncludeEmptyDirectories = true,
+			//};
 
-			string BackupPath = string.Format("{0}\\Backup-{1}.7z", BackupTo, Helpers.CurrentUnixStamp);
-			Compressor.CompressDirectory(BackupFrom, BackupPath);
+
+			string BackupPath = string.Format("{0}\\Backup-{1}.zip", BackupTo, Helpers.CurrentUnixStamp);
+            //Compressor.CompressDirectory(BackupFrom, BackupPath);
+            ZipFile.CreateFromDirectory(BackupFrom, BackupPath, System.IO.Compression.CompressionLevel.Fastest, true);
+
+
 
 			_Parent.Log.ConsolePrint(LogLevel.Success, "Backup of server {0} complete", ServerData.GameServerName);
 			return true;
@@ -73,7 +79,7 @@ namespace AtlasUpdater.Interfaces
 		{
 			try
 			{
-				var BackupFiles = Directory.GetFiles(ServerData.BackupDirectory, "*.7z", SearchOption.TopDirectoryOnly);
+				var BackupFiles = Directory.GetFiles(ServerData.BackupDirectory, "*.zip", SearchOption.TopDirectoryOnly);
 				if( BackupFiles.Length > _Parent.ATLASConfiguration.Backup.NumberOfBackupsToKeepPerServer )
 				{
 					var Dict = new Dictionary<string, long>();
