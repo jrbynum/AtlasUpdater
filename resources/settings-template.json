@@ -5,6 +5,8 @@
     "LogLevel": "Debug",
 
     "SteamCMDPath": "E:\\steamCMD",
+    "SteamUpdateScript": "E:\\AtlasUpdater\\SteamUpdateScript\\updatescript.cfg",
+    "GameServerPath": "E:\\atlasserver",
     "ShowSteamUpdateInConsole": "true",
     "UseServerNameInINIFile": "false",
 
@@ -22,9 +24,7 @@
 
     "Servers": [
         {
-            "SteamUpdateScript": "E:\\AtlasUpdater\\SteamUpdateScript\\updatescript.cfg",
             "BackupDirectory": "E:\\atlasserverBACKUP\\A1",
-            "GameServerPath": "E:\\atlasserver",
 			"GameServerPIDPath": "E:\\AtlasUpdater\\AtlasPIDFiles\\A1",
             "GameServerName": "ZoneTemperateHomeA1",
             "GameServerMap": "Ocean",
@@ -32,7 +32,7 @@
             "QueryPort": 10000,
             "RCONPort": 24000,
             "Port": 16000,
-
+            "GameServerIP": "68.148.13.117",
             "ServerPassword": "",
             "ServerAdminPassword": "16oct1960",
             "ServerPVE": "true",
@@ -40,9 +40,7 @@
             "ServerParameters": {"Ocean?ServerX": "0", "ServerY": "0", "AltSaveDirectoryName" : "A1"}
         },
         {
-            "SteamUpdateScript": "E:\\AtlasUpdater\\SteamUpdateScript",
             "BackupDirectory": "E:\\atlasserverBACKUP\\A2",
-            "GameServerPath": "E:\\atlasserver",
 			"GameServerPIDPath": "E:\\AtlasUpdater\\AtlasPIDFiles\\A2",
             "GameServerName": "ZoneTropicalMapA2",
             "GameServerMap": "Ocean",
@@ -50,7 +48,7 @@
             "QueryPort": 10001,
             "RCONPort": 24001,
             "Port": 16002,
-
+            "GameServerIP": "68.148.13.117",
             "ServerPassword": "",
             "ServerAdminPassword": "16oct1960",
             "ServerPVE": "true",
@@ -60,9 +58,7 @@
             }
         },
         {
-            "SteamUpdateScript": "E:\\AtlasUpdater\\SteamUpdateScript",
             "BackupDirectory": "E:\\atlasserverBACKUP\\B1",
-            "GameServerPath": "E:\\atlasserver",
 			"GameServerPIDPath": "E:\\AtlasUpdater\\AtlasPIDFiles\\B1",
             "GameServerName": "ZoneEquatorialMapB1",
             "GameServerMap": "Ocean",
@@ -70,7 +66,7 @@
             "QueryPort": 10300,
             "RCONPort": 24002,
             "Port": 16600,
-
+            "GameServerIP": "68.148.13.117",
             "ServerPassword": "",
             "ServerAdminPassword": "16oct1960",
             "ServerPVE": "false",
@@ -80,9 +76,7 @@
             }
         },
         {
-            "SteamUpdateScript": "E:\\AtlasUpdater\\SteamUpdateScript",
             "BackupDirectory": "E:\\atlasserverBACKUP\\B2",
-            "GameServerPath": "E:\\atlasserver",
 			"GameServerPIDPath": "E:\\AtlasUpdater\\AtlasPIDFiles\\B2",
             "GameServerName": "ZonePolarMapB2",
             "GameServerMap": "Ocean",
@@ -90,7 +84,7 @@
             "QueryPort": 10301,
             "RCONPort": 24003,
             "Port": 16602,
-
+            "GameServerIP": "68.148.13.117",
             "ServerPassword": "",
             "ServerAdminPassword": "16oct1960",
             "ServerPVE": "false",
@@ -99,6 +93,6 @@
 				"Ocean?ServerX": "1","ServerY": "1","AltSaveDirectoryName" :"B2"
             }
         }
-        
+       
     ]
 }
