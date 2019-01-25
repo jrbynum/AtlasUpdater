@@ -67,6 +67,15 @@ AtlasUpdater will respawn any servers that close while it is running if it does 
 
 	The path to the SteamCMD executable. This should not include the name of the executable, just the folder that contains it. For example: "C:\\SteamCMD".
 	For Windows, double escape backslashes in the path. So C:\Windows should be C:\\Windows.
+	
+- SteamUpdateScript
+
+	Path to the SteamCMD update script for this server. If you are not currently using an update script, an example can be found in the resources folder.
+	Note: This script must end with the quit command, or AtlasUpdater will hang waiting for SteamCMD to exit. Check the example script for a list of suggested commands.	
+
+- GameServerPath
+
+	The path to the root of the gameserver. Should contain the 'Engine' and 'ShooterGame' folders.
 
 - ShowSteamUpdateInConsole
 
@@ -97,18 +106,11 @@ AtlasUpdater will respawn any servers that close while it is running if it does 
 
 **Server Configuration Options: - one entry for each grid server**  
 
-- SteamUpdateScript
-
-	Path to the SteamCMD update script for this server. If you are not currently using an update script, an example can be found in the resources folder.
-	Note: This script must end with the quit command, or AtlasUpdater will hang waiting for SteamCMD to exit. Check the example script for a list of suggested commands.
 
 - BackupDirectory
 
 	The folder to store compressed backup archives for this server. This should be a unique path for each server instance. Leave this blank if you are not using the backup feature.
 
-- GameServerPath
-
-	The path to the root of the gameserver. Should contain the 'Engine' and 'ShooterGame' folders.
 	
 - GameServerPIDPath
 
