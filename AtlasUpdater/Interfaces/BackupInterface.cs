@@ -27,7 +27,7 @@ namespace AtlasUpdater.Interfaces
 		public BackupInterfaceWindows(AtlasUpdater parent) : base(parent) {}
 		public override bool BackupServer(SettingsLoader.ServerChild ServerData)
 		{
-			string BackupFrom = string.Format("{0}\\ShooterGame\\Saved\\", ServerData.GameServerPath);
+			string BackupFrom = string.Format("{0}\\ShooterGame\\Saved\\", _Parent.ATLASConfiguration.GameServerPath);
 			string BackupTo = ServerData.BackupDirectory;
 			if( !Directory.Exists(BackupFrom) )
 			{

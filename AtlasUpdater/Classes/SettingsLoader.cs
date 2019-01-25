@@ -60,8 +60,10 @@ namespace AtlasUpdater.Classes
 		
 		public string LogLevel { get; set; }
 		public string SteamCMDPath { get; set; }
+        public string SteamUpdateScript { get; set; }
+        public string GameServerPath { get; set; }
 
-		public bool ShowSteamUpdateInConsole { get; set; }
+        public bool ShowSteamUpdateInConsole { get; set; }
 		public bool UseServerNameInINIFile { get; set; }
 
 		public BackupChild Backup { get; set; }
@@ -87,9 +89,7 @@ namespace AtlasUpdater.Classes
 		public class ServerChild
 		{
 			public string ServerAdminPassword { get; set; }
-			public string SteamUpdateScript { get; set; }
 			public string BackupDirectory { get; set; }
-			public string GameServerPath { get; set; }
             public string GameServerPIDPath { get; set; }
             public string GameServerName { get; set; }
 			public string ServerPassword { get; set; }

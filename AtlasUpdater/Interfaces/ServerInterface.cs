@@ -108,7 +108,7 @@ namespace AtlasUpdater.Interfaces
 
 			var ProcessData = new ProcessStartInfo()
 			{
-				WorkingDirectory = string.Format("{0}\\ShooterGame\\Binaries\\Win64", ServerData.GameServerPath),
+				WorkingDirectory = string.Format("{0}\\ShooterGame\\Binaries\\Win64", _Parent.ATLASConfiguration.GameServerPath),
 				FileName = "ShooterGameServer.exe",
 				Arguments = QueryString.ToString(),
 

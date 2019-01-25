@@ -5,13 +5,16 @@ using System.Threading;
 using AtlasUpdater.Classes;
 using AtlasUpdater.Interfaces;
 using System.Collections.Generic;
+using System.Windows.Forms;
+
 
 namespace AtlasUpdater
 {
 	#region Program Stub
 	class Program
 	{
-		static void Main(string[] args)
+        [STAThread]
+        static void Main(string[] args)
 		{
 			var System = new AtlasUpdater();
 			try { Console.WindowWidth = 140; } catch ( NotSupportedException ) {}
@@ -59,8 +62,39 @@ namespace AtlasUpdater
 
 			System.Environment.Exit(1);
 		}
+        public static string GetFileName()
+        {
+            string path = null;
 
-		public static string GetApplicationVersion()
+            OpenFileDialog openFileDialog1 = new OpenFileDialog
+            {
+                InitialDirectory = @"C:\",
+                Title = "Locate JSON Settings File",
+
+                CheckFileExists = true,
+                CheckPathExists = true,
+
+                DefaultExt = "json",
+                Filter = "json files (*.json)|*.json",
+                FilterIndex = 2,
+                RestoreDirectory = true,
+
+                ReadOnlyChecked = true,
+                ShowReadOnly = true
+            };
+
+            //Invoke((Action)(() => { saveFileDialog.ShowDialog() }));
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+
+                path = openFileDialog1.FileName;
+                return path;
+            }
+
+            return path;
+
+        }
+        public static string GetApplicationVersion()
 		{
 			System.Reflection.Assembly execAssembly = System.Reflection.Assembly.GetCallingAssembly();
 			System.Reflection.AssemblyName name = execAssembly.GetName();
@@ -137,12 +171,19 @@ namespace AtlasUpdater
 			this.Log = new ConsoleLogger(LogLevel.Debug);
 			this.Log.ConsolePrint(LogLevel.Info, "AtlasUpdater Starting (Version: {0})", Helpers.GetApplicationVersion());
 			
-			// Load configuration from settings.json
+			// Load configuration from settings.json located in current directory
 			this.ATLASConfiguration = SettingsLoader.LoadConfiguration("settings.json", Log);
 			if( this.ATLASConfiguration == null )
-			{
-				Helpers.ExitWithError();
-			}
+			{//file not found lets try and find one....
+
+                string f = Helpers.GetFileName();
+
+                this.ATLASConfiguration = SettingsLoader.LoadConfiguration(f, Log);
+                if (this.ATLASConfiguration == null)
+                { //still didnt find a file so exit...
+                    Helpers.ExitWithError();
+                }
+            }
 
 			// Configure Logger
 			if( this.ATLASConfiguration.LogLevel.Length > 0 )
@@ -163,7 +204,7 @@ namespace AtlasUpdater
 			foreach( var ServerData in this.ATLASConfiguration.Servers )
 			{
 				TempList.Add( new ServerClass(ServerData) );
-				this.Log.ConsolePrint(LogLevel.Debug, "Loaded server '{0}' from configuration", ServerData.GameServerName);
+				this.Log.ConsolePrint(LogLevel.Debug, "Loaded server shard '{0}' from configuration", ServerData.GameServerName);
 			}
 
             //convert from list to array
@@ -212,9 +253,10 @@ namespace AtlasUpdater
 
 			Log.ConsolePrint(LogLevel.Debug, "Init Server '{0}'", Servers[0].ServerData.GameServerName);
             Log.ConsolePrint(LogLevel.Debug, "There are '{0}' Grids", numOfGrids);
-            int CurrentAppID = SteamInt.GetGameBuildVersion(Servers[0].ServerData.GameServerPath);
+            //int CurrentAppID = SteamInt.GetGameBuildVersion(Servers[0].ServerData.GameServerPath);
+            int CurrentAppID = SteamInt.GetGameBuildVersion(this.ATLASConfiguration.GameServerPath);
 
-			Servers[0].LastBackedUp = Helpers.CurrentUnixStamp;
+            Servers[0].LastBackedUp = Helpers.CurrentUnixStamp;
 			if( (CurrentAppID < BuildNumber) && (CurrentAppID != -1) )
 			{
 				// Update Available - make sure its not running
@@ -222,8 +264,9 @@ namespace AtlasUpdater
 				{
 					// Update Server
 					Log.ConsolePrint(LogLevel.Info, "Server '{0}' has an update available, Updating before we start the server up.", Servers[0].ServerData.GameServerName);
-					SteamInt.UpdateGame(Servers[0].ServerData.SteamUpdateScript, ATLASConfiguration.ShowSteamUpdateInConsole);
-					Log.ConsolePrint(LogLevel.Success, "Server '{0}' update successful, starting server.", Servers[0].ServerData.GameServerName);
+					//SteamInt.UpdateGame(Servers[0].ServerData.SteamUpdateScript, ATLASConfiguration.ShowSteamUpdateInConsole);
+                    SteamInt.UpdateGame(ATLASConfiguration.SteamUpdateScript, ATLASConfiguration.ShowSteamUpdateInConsole);
+                    Log.ConsolePrint(LogLevel.Success, "Server '{0}' update successful, starting server.", Servers[0].ServerData.GameServerName);
 				}
                 else
                 {
@@ -238,7 +281,7 @@ namespace AtlasUpdater
             foreach( var Server in Servers )
             {
             // Start Server
-                Log.ConsolePrint(LogLevel.Info, "Server '{0}' is up to date. Starting/Connecting to server", Server.ServerData.GameServerName);
+                Log.ConsolePrint(LogLevel.Info, "Atlas Server is up to date. Starting/Connecting to server shard '{0}'", Server.ServerData.GameServerName);
 			    var ProcessID = ServerInt.StartServer(Server.ServerData);
 			    Server.ProcessID = ProcessID;
 			}
@@ -249,6 +292,7 @@ namespace AtlasUpdater
 
 			int PreviousBuild = BuildNumber;
 			bool UpdatesQueued = false;
+
 			while( _Running )
 			{
                 //check for an update every x minutes - x is in the settings.json file
@@ -264,11 +308,8 @@ namespace AtlasUpdater
 						if( ( BuildNumber > PreviousBuild ) && ( PreviousBuild != -1 ) ) Log.ConsolePrint(LogLevel.Info, "A new build of Atlas is available. Build number: {0}", BuildNumber);
 					}
 
-                    //add surver query to get # of players
 
-                    // Check for Player Requirement
-                    //if (ATLASConfiguration.PostponeUpdateWhenPlayersHigherThan > 0)
-                    //{
+                    //Query each server during update check for players online and print to console and write to log
                     foreach (var Server in Servers)
                     {
 
@@ -277,16 +318,12 @@ namespace AtlasUpdater
                             try
                             {
                                 var QueryData = Query.QueryServer();
-//                                if (Convert.ToInt32(QueryData["CurrentPlayers"]) > ATLASConfiguration.PostponeUpdateWhenPlayersHigherThan)
-//                                {
                                     Log.ConsolePrint(LogLevel.Info, "Server '{0}' has {1} Players online", Server.ServerData.GameServerName, QueryData["CurrentPlayers"]);
                                     continue;
-//                                }
                             }
                             catch (QueryException) { }
                         }
                     }
-                    //}
 
                 }
 
@@ -296,7 +333,7 @@ namespace AtlasUpdater
 					if( Servers[0].MinutesRemaining == -1 )
 					{
 						// Check each server for updates
-						var ServerBuild = SteamInt.GetGameBuildVersion(Servers[0].ServerData.GameServerPath);
+						var ServerBuild = SteamInt.GetGameBuildVersion(ATLASConfiguration.GameServerPath);
                         if ((ServerBuild < BuildNumber) && (ServerBuild != -1))
                         { // we have an update available
 
@@ -325,10 +362,12 @@ namespace AtlasUpdater
 
 					if( MinutePassed && (Servers[0].MinutesRemaining >= 1) )
 					{
-						Log.ConsolePrint(LogLevel.Debug, "Ticking update minute counter from {0} to {1} for server '{2}'", Servers[0].MinutesRemaining, Servers[0].MinutesRemaining-1, Servers[0].ServerData.GameServerName);
-						Servers[0].MinutesRemaining = (Servers[0].MinutesRemaining - 1);
-
-                        // Send warning message to Server
+						Log.ConsolePrint(LogLevel.Debug, "Ticking update minute counter from {0} to {1} for server '{2}'", Servers[0].MinutesRemaining, Servers[0].MinutesRemaining-1, "Atlas Server");
+                        foreach (var Server in Servers)
+                        {
+                            Server.MinutesRemaining = (Server.MinutesRemaining - 1);
+                        }
+                        // Send warning message to each Server Shard
                         if (Servers[0].MinutesRemaining != 0)
                         {
                             foreach (var Server in Servers)
@@ -349,7 +388,7 @@ namespace AtlasUpdater
                             }
                         }
 					}
-
+                    //Warnings are over time to shutdown and update
 					if( Servers[0].MinutesRemaining == 0 )
 					{
                         foreach (var Server in Servers)
@@ -373,16 +412,17 @@ namespace AtlasUpdater
                             // Shutdown Server
                             var ResetEvent = new AutoResetEvent(false);
                             ServerInt.StopServer(Server.ServerData, ResetEvent);
-                            Log.ConsolePrint(LogLevel.Info, "Server '{0}' will now be shutdown for an update", Server.ServerData.GameServerName);
+                            Log.ConsolePrint(LogLevel.Info, "Server shard '{0}' will now be shutdown for an update", Server.ServerData.GameServerName);
 
                             ResetEvent.WaitOne();
-                            Log.ConsolePrint(LogLevel.Debug, "Server '{0}' now waiting for process exit", Server.ServerData.GameServerName);
+                            Log.ConsolePrint(LogLevel.Debug, "Server shard '{0}' now waiting for process exit", Server.ServerData.GameServerName);
                         }
 
 						// Update Server - only need to update one
-						SteamInt.UpdateGame(Servers[0].ServerData.SteamUpdateScript, ATLASConfiguration.ShowSteamUpdateInConsole);
-						_Sleeper.WaitOne( TimeSpan.FromSeconds(2) );
+						SteamInt.UpdateGame(ATLASConfiguration.SteamUpdateScript, ATLASConfiguration.ShowSteamUpdateInConsole);
+						_Sleeper.WaitOne( TimeSpan.FromSeconds(4) );
 
+                        //Update is done - time to restart each server shard
                         foreach (var Server in Servers)
                         {
                             // Restart All Grids 
@@ -394,7 +434,7 @@ namespace AtlasUpdater
                         }
 
 					}
-
+                    //Backup stuff
 					if( ATLASConfiguration.Backup.EnableBackup )
 					{
                         foreach (var Server in Servers)
