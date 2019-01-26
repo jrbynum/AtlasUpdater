@@ -251,7 +251,7 @@ namespace AtlasUpdater
 			// Initial Setup
             //we only need to check for an update on one server - Atlas only has one map with multiple grids 
 
-			Log.ConsolePrint(LogLevel.Debug, "Init Server '{0}'", Servers[0].ServerData.GameServerName);
+			Log.ConsolePrint(LogLevel.Debug, "Initializing Atlas Server");
             Log.ConsolePrint(LogLevel.Debug, "There are '{0}' Grids", numOfGrids);
             //int CurrentAppID = SteamInt.GetGameBuildVersion(Servers[0].ServerData.GameServerPath);
             int CurrentAppID = SteamInt.GetGameBuildVersion(this.ATLASConfiguration.GameServerPath);
@@ -263,14 +263,14 @@ namespace AtlasUpdater
 				if( !ServerInt.ServerRunning(Servers[0].ServerData) )
 				{
 					// Update Server
-					Log.ConsolePrint(LogLevel.Info, "Server '{0}' has an update available, Updating before we start the server up.", Servers[0].ServerData.GameServerName);
+					Log.ConsolePrint(LogLevel.Info, "The Atlas Server has an update available, Updating before we start the server up.");
 					//SteamInt.UpdateGame(Servers[0].ServerData.SteamUpdateScript, ATLASConfiguration.ShowSteamUpdateInConsole);
                     SteamInt.UpdateGame(ATLASConfiguration.SteamUpdateScript, ATLASConfiguration.ShowSteamUpdateInConsole);
-                    Log.ConsolePrint(LogLevel.Success, "Server '{0}' update successful, starting server.", Servers[0].ServerData.GameServerName);
+                    Log.ConsolePrint(LogLevel.Success, "Atlas Server update successful, starting server.");
 				}
                 else
                 {
-                    Log.ConsolePrint(LogLevel.Error, "Server '{0}' has an update available, But the server is running", Servers[0].ServerData.GameServerName);
+                    Log.ConsolePrint(LogLevel.Error, "The Atlas Server has an update available, But the server is running");
                 }
 
                 //var ProcessID = ServerInt.StartServer(Servers[0].ServerData);
@@ -282,6 +282,7 @@ namespace AtlasUpdater
             {
             // Start Server
                 Log.ConsolePrint(LogLevel.Info, "Atlas Server is up to date. Starting/Connecting to server shard '{0}'", Server.ServerData.GameServerName);
+                //start each shard and grab the PID
 			    var ProcessID = ServerInt.StartServer(Server.ServerData);
 			    Server.ProcessID = ProcessID;
 			}

@@ -67,6 +67,7 @@ namespace AtlasUpdater.Interfaces
 
 			string BackupPath = string.Format("{0}\\Backup-{1}.zip", BackupTo, Helpers.CurrentUnixStamp);
             //Compressor.CompressDirectory(BackupFrom, BackupPath);
+
             ZipFile.CreateFromDirectory(BackupFrom, BackupPath, System.IO.Compression.CompressionLevel.Fastest, true);
 
 
